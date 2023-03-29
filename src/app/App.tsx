@@ -1,29 +1,23 @@
+import { Container, Typography } from '@mui/material';
 import React from 'react';
+
 import './App.scss';
 import InputAddTodo from './components/InputAddTodo';
-import ItemTodo from './components/ItemTodo';
+import ItemTodos from './components/ItemTodos';
+import { AppContextProvider } from './stores/app.context';
 
 const App: React.FC = () => {
-
-  const [items, setItems] = React.useState<string[]>([]);
-
-  const handleAddItem = (title: string) => {
-    setItems([...items, title]);
-  }
-  const handleDeleteItem = (key: number) => {
-    const newItems = items.filter((item, index) => index !== key);
-    setItems(newItems);
-  }
-
   return (
-    <div className="App">
-      <h4>To Do List</h4>
-      <InputAddTodo handleAdd={handleAddItem} />
-      <hr />
-      {items.map((item, index) => (
-        <ItemTodo key={index} title={item} handleDelete={() => handleDeleteItem(index)} />
-      ))}
-    </div>
+    <AppContextProvider>
+      <div className="App">
+        <Container maxWidth="sm" sx={{py: 4}}>
+          <Typography variant="h4" gutterBottom>To Do List</Typography>
+          <InputAddTodo />
+          <hr />
+          <ItemTodos />
+        </Container>
+      </div>
+    </AppContextProvider>
   );
 }
 
