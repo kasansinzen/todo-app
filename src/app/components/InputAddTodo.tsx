@@ -1,10 +1,12 @@
 import React from 'react';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Button, TextField } from '@mui/material';
 
-interface Props {
-  handleAdd(title: string): void;
-}
-const InputAddTodo: React.FC<Props> = (props) => {
+import AppContext from '../stores/app.context';
 
+const InputAddTodo: React.FC = () => {
+
+  const { handleAddItem } = React.useContext(AppContext);
   const [inputTodo, setInputTodo] = React.useState<string>('');
 
   const handleChangeInputTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,15 +15,21 @@ const InputAddTodo: React.FC<Props> = (props) => {
   }
   const handleSubmitAddTodo = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.handleAdd(inputTodo);
+    handleAddItem(inputTodo);
     setInputTodo('');
   }
 
   return (
     <div className="InputAddTodo">
       <form onSubmit={handleSubmitAddTodo}>
-        <input type="text" value={inputTodo} onChange={handleChangeInputTodo} />
-        <button type="submit">Add</button>
+        <Grid container spacing={2}>
+          <Grid xs={10}>
+            <TextField variant="standard" margin="none" fullWidth label="Your To Do" value={inputTodo} onChange={handleChangeInputTodo} />
+          </Grid>
+          <Grid xs={2}>
+            <Button type="submit" variant="outlined">Enter</Button>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );
