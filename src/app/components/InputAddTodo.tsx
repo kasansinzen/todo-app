@@ -20,14 +20,14 @@ const InputAddTodo: React.FC = () => {
   }
 
   return (
-    <div className="InputAddTodo">
+    <div data-testid="InputAddTodo" className="InputAddTodo">
       <form onSubmit={handleSubmitAddTodo}>
         <Grid container spacing={2}>
           <Grid xs={10}>
-            <TextField variant="standard" margin="none" fullWidth label="Your To Do" value={inputTodo} onChange={handleChangeInputTodo} />
+            <TextField data-testid="inputTodo" variant="standard" margin="none" fullWidth label="Your To Do" value={inputTodo} onChange={handleChangeInputTodo} required />
           </Grid>
-          <Grid xs={2}>
-            <Button type="submit" variant="outlined">Enter</Button>
+          <Grid xs={2} data-testid="grid-button">
+            <Button data-testid="submitTodo" type="submit" variant="outlined">Enter</Button>
           </Grid>
         </Grid>
       </form>
